@@ -1,0 +1,158 @@
+import tkinter as tk
+from tkinter import *
+import pyautogui
+import pyscreeze
+import time
+
+janela = tk.Tk()
+
+
+
+janela.title('Lobby Bot League of Legends.')
+janela.minsize(400,300)
+janela.maxsize(400,300)
+
+
+
+
+
+def iniciar():
+    poutput1 = char1input.get()
+    poutput2 = char2input.get()
+    poutput3 = char3input.get()
+    boutput1 = ban1input.get()
+    boutput2 = ban2input.get()
+    png = ".png"
+    
+
+    jogar = pyscreeze.locateCenterOnScreen("jogar.png", confidence= 0.9, minSearchTime=50)
+    pyautogui.moveTo(jogar, duration = 0.5)
+    pyautogui.click()
+
+
+    pvp = pyscreeze.locateCenterOnScreen("pvp.png", confidence= 0.8, minSearchTime=50)
+    pyautogui.moveTo(pvp, duration = 0.5)
+    pyautogui.click()
+
+
+    modo = pyscreeze.locateCenterOnScreen("modo.png", confidence= 0.8, minSearchTime=50)
+    pyautogui.moveTo(modo, duration = 0.5)
+    pyautogui.click()
+
+
+    confirmar = pyscreeze.locateCenterOnScreen("2.png", confidence= 0.8, minSearchTime=50)
+    pyautogui.moveTo(confirmar, duration = 0.5)
+    pyautogui.click()
+
+
+    procurar = pyscreeze.locateCenterOnScreen("encontrar.png", confidence= 0.8, minSearchTime=50)
+    pyautogui.moveTo(procurar, duration = 0.5)
+    pyautogui.click()
+
+
+    aceitar = pyscreeze.locateCenterOnScreen("3.png", confidence= 0.8, minSearchTime=700)
+    pyautogui.moveTo(aceitar, duration = 0.5)
+    pyautogui.click()
+
+    time.sleep(15)
+
+
+    noctune1 = pyscreeze.locateCenterOnScreen(poutput1 + png, confidence= 0.8, minSearchTime=10)
+    pyautogui.moveTo(noctune1, duration = 0.5)
+    pyautogui.click()
+
+    time.sleep(20)
+
+
+
+    while True:
+        try:
+            shaco = pyscreeze.locateCenterOnScreen(boutput1 + png, confidence= 0.8, minSearchTime=10)
+            pyautogui.moveTo(shaco, duration = 0.5)
+            pyautogui.click()
+
+            ban = pyscreeze.locateCenterOnScreen("ban.png", confidence= 0.8, minSearchTime=5)
+            pyautogui.moveTo(ban, duration = 0.5)
+            pyautogui.click()
+            break
+        except:
+            pass 
+        try:    
+            morgana = pyscreeze.locateCenterOnScreen(boutput2 + png, confidence= 0.8, minSearchTime=10)
+            pyautogui.moveTo(morgana, duration = 0.5)
+            pyautogui.click()
+
+            ban2 = pyscreeze.locateCenterOnScreen("ban.png", confidence= 0.8, minSearchTime=30)
+            pyautogui.moveTo(ban2, duration = 0.5)
+            pyautogui.click()
+            break
+        except:
+            pass
+
+
+        while True:
+            try:
+                noctune2 = pyscreeze.locateCenterOnScreen(poutput1 + png, confidence= 0.8, minSearchTime=10)
+                pyautogui.moveTo(noctune2, duration = 0.5)
+                pyautogui.click()
+
+
+                confirmarpersonagem = pyscreeze.locateCenterOnScreen("confirmarpersonagem.png", confidence= 0.8, minSearchTime=5)
+                pyautogui.moveTo(confirmarpersonagem, duration = 0.5)
+                pyautogui.click()
+                break
+            except:
+                pass 
+            try:    
+                vi = pyscreeze.locateCenterOnScreen(poutput2 + png, confidence= 0.8, minSearchTime=10)
+                pyautogui.moveTo(vi, duration = 0.5)
+                pyautogui.click()
+
+  
+                confirmarpersonagem = pyscreeze.locateCenterOnScreen("confirmarpersonagem.png", confidence= 0.8, minSearchTime=5)
+                pyautogui.moveTo(confirmarpersonagem, duration = 0.5)
+                pyautogui.click()
+                break
+            except:
+                pass
+            try:
+                kayn = pyscreeze.locateCenterOnScreen(poutput3 + png, confidence= 0.8, minSearchTime=10)
+                pyautogui.moveTo(kayn, duration = 0.5)
+                pyautogui.click()
+
+                confirmarpersonagem = pyscreeze.locateCenterOnScreen("confirmarpersonagem.png", confidence= 0.8, minSearchTime=5)
+                pyautogui.moveTo(confirmarpersonagem, duration = 0.5)
+                pyautogui.click()
+                break
+            except:
+                pass
+            return
+    
+
+
+nome1 = tk.Label(janela, text="Primeiro personagem:").grid(row=0, padx=5, pady=5)
+nome2 = tk.Label(janela, text="Segundo personagem:").grid(row=1, padx=5, pady=5)
+nome3 = tk.Label(janela, text="Terceiro personagem:").grid(row=2, padx=5, pady=5)
+ban1 = tk.Label(janela, text="Primeiro ban").grid(row=3, padx=5, pady=5)
+ban2 = tk.Label(janela, text="Segundo ban").grid(row=4, padx=5, pady=5)
+
+
+
+char1input = tk.Entry(janela)
+char2input = tk.Entry(janela)
+char3input = tk.Entry(janela)
+ban1input = tk.Entry(janela)
+ban2input = tk.Entry(janela)
+
+char1input.grid(row=0, column=1, padx=5, pady=5)
+char2input.grid(row=1, column=1, padx=5, pady=5)
+char3input.grid(row=2, column=1, padx=5, pady=5)
+ban1input.grid(row=3, column=1, padx=5, pady=5)
+ban2input.grid(row=4, column=1, padx=5, pady=5)
+
+
+enviar = Button(janela, command=iniciar, text="Ativar")
+enviar.grid(column=1, row=8, padx=10, pady=10)
+
+
+janela.mainloop()
