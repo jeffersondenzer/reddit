@@ -1,158 +1,154 @@
-import tkinter as tk
-from tkinter import *
+import PySimpleGUI as sg
 import pyautogui
 import pyscreeze
 import time
 
-janela = tk.Tk()
 
 
 
-janela.title('Lobby Bot League of Legends.')
-janela.minsize(400,300)
-janela.maxsize(400,300)
+sg.theme('DarkAmber')   # Add a touch of color
+# All the stuff inside your window.
+layout = [  [sg.Text('Primeiro char', text_color="green") , sg.InputText(key='char1input')],
+            [sg.Text('Segundo char', text_color="green"), sg.InputText(key='char2input')],
+            [sg.Text('Terceiro char', text_color="green"), sg.InputText(key='char3input')],
+            [sg.Text('Primeiro ban', text_color="green"), sg.InputText(key='ban1input')],
+            [sg.Text('Segundo ban', text_color="green"), sg.InputText(key='ban2input')],
+            [sg.Button('Enviar'), sg.Button('Cancel')]]
 
+# Create the Window
+window = sg.Window('LolBot', layout)
+# Event Loop to process "events" and get the "values" of the inputs
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        break
+    if event == 'Enviar':
 
-
-
-
-def iniciar():
-    poutput1 = char1input.get()
-    poutput2 = char2input.get()
-    poutput3 = char3input.get()
-    boutput1 = ban1input.get()
-    boutput2 = ban2input.get()
-    png = ".png"
+        poutput1 = str(values['char1input'])
+        poutput2 = str(values['char2input'])
+        poutput3 = str(values['char3input'])
+        boutput1 = str(values['ban1input'])
+        boutput2 = str(values['ban2input'])
+        png = ".png"
+        
+        
     
-
-    jogar = pyscreeze.locateCenterOnScreen("jogar.png", confidence= 0.9, minSearchTime=50)
+    #iniciar operação
+    jogar = pyscreeze.locateCenterOnScreen("./img/jogar.png", confidence= 0.9, minSearchTime=50)
     pyautogui.moveTo(jogar, duration = 0.5)
     pyautogui.click()
 
-
-    pvp = pyscreeze.locateCenterOnScreen("pvp.png", confidence= 0.8, minSearchTime=50)
+    #selecionar modo pvp1
+    pvp = pyscreeze.locateCenterOnScreen("./img/pvp.png", confidence= 0.8, minSearchTime=50)
     pyautogui.moveTo(pvp, duration = 0.5)
     pyautogui.click()
 
-
-    modo = pyscreeze.locateCenterOnScreen("modo.png", confidence= 0.8, minSearchTime=50)
+    #selecionar modo pvp2
+    modo = pyscreeze.locateCenterOnScreen("./img/modo.png", confidence= 0.8, minSearchTime=50)
     pyautogui.moveTo(modo, duration = 0.5)
     pyautogui.click()
 
-
-    confirmar = pyscreeze.locateCenterOnScreen("2.png", confidence= 0.8, minSearchTime=50)
+    #confirmar modo pvp
+    confirmar = pyscreeze.locateCenterOnScreen("./img/2.png", confidence= 0.8, minSearchTime=50)
     pyautogui.moveTo(confirmar, duration = 0.5)
     pyautogui.click()
 
-
-    procurar = pyscreeze.locateCenterOnScreen("encontrar.png", confidence= 0.8, minSearchTime=50)
+    #procurar partida
+    procurar = pyscreeze.locateCenterOnScreen("./img/encontrar.png", confidence= 0.8, minSearchTime=50)
     pyautogui.moveTo(procurar, duration = 0.5)
     pyautogui.click()
 
-
-    aceitar = pyscreeze.locateCenterOnScreen("3.png", confidence= 0.8, minSearchTime=700)
+    #aceitar partida
+    aceitar = pyscreeze.locateCenterOnScreen("./img/3.png", confidence= 0.8, minSearchTime=700)
     pyautogui.moveTo(aceitar, duration = 0.5)
     pyautogui.click()
 
     time.sleep(15)
 
-
-    noctune1 = pyscreeze.locateCenterOnScreen(poutput1 + png, confidence= 0.8, minSearchTime=10)
-    pyautogui.moveTo(noctune1, duration = 0.5)
+    #selecionar personagem q deseja jogar INICIALMENTE
+    personagem1 = pyscreeze.locateCenterOnScreen(poutput1 + png, confidence= 0.8, minSearchTime=10)
+    pyautogui.moveTo(personagem1, duration = 0.5)
     pyautogui.click()
+    break
 
-    time.sleep(20)
+time.sleep(20)
 
 
-
-    while True:
+# TESTE LÓGICO PARA VER SE O PERSONAGEM QUE QUERO VAI ESTAR DISPONÍVEL E PARA BANIR ALGUM TAMBÉM.
+while True:
         try:
-            shaco = pyscreeze.locateCenterOnScreen(boutput1 + png, confidence= 0.8, minSearchTime=10)
-            pyautogui.moveTo(shaco, duration = 0.5)
+            ban3 = pyscreeze.locateCenterOnScreen(boutput1 + png, confidence= 0.8, minSearchTime=5)
+            pyautogui.moveTo(ban3, duration = 0.3)
             pyautogui.click()
 
-            ban = pyscreeze.locateCenterOnScreen("ban.png", confidence= 0.8, minSearchTime=5)
-            pyautogui.moveTo(ban, duration = 0.5)
+            ban = pyscreeze.locateCenterOnScreen("./img/ban.png", confidence= 0.8, minSearchTime=5)
+            pyautogui.moveTo(ban, duration = 0.3)
             pyautogui.click()
             break
         except:
             pass 
         try:    
-            morgana = pyscreeze.locateCenterOnScreen(boutput2 + png, confidence= 0.8, minSearchTime=10)
-            pyautogui.moveTo(morgana, duration = 0.5)
+            ban4 = pyscreeze.locateCenterOnScreen(boutput2 + png, confidence= 0.8, minSearchTime=5)
+            pyautogui.moveTo(ban4, duration = 0.3)
             pyautogui.click()
 
-            ban2 = pyscreeze.locateCenterOnScreen("ban.png", confidence= 0.8, minSearchTime=30)
-            pyautogui.moveTo(ban2, duration = 0.5)
+            ban = pyscreeze.locateCenterOnScreen("./img/ban.png", confidence= 0.8, minSearchTime=10)
+            pyautogui.moveTo(ban, duration = 0.3)
             pyautogui.click()
             break
         except:
             pass
 
+#selecionar personagem novamente depois do ban
+while True:
+            
 
-        while True:
             try:
-                noctune2 = pyscreeze.locateCenterOnScreen(poutput1 + png, confidence= 0.8, minSearchTime=10)
-                pyautogui.moveTo(noctune2, duration = 0.5)
+                personagem1 = pyscreeze.locateCenterOnScreen(poutput1 + png, confidence= 0.8, minSearchTime=5)
+                pyautogui.moveTo(personagem1, duration = 0.5)
                 pyautogui.click()
 
 
-                confirmarpersonagem = pyscreeze.locateCenterOnScreen("confirmarpersonagem.png", confidence= 0.8, minSearchTime=5)
+                confirmarpersonagem = pyscreeze.locateCenterOnScreen("./img/confirmarpersonagem.png", confidence= 0.8, minSearchTime=4)
                 pyautogui.moveTo(confirmarpersonagem, duration = 0.5)
                 pyautogui.click()
                 break
             except:
                 pass 
             try:    
-                vi = pyscreeze.locateCenterOnScreen(poutput2 + png, confidence= 0.8, minSearchTime=10)
-                pyautogui.moveTo(vi, duration = 0.5)
+                personagem2 = pyscreeze.locateCenterOnScreen(poutput2 + png, confidence= 0.8, minSearchTime=5)
+                pyautogui.moveTo(personagem2, duration = 0.5)
                 pyautogui.click()
 
   
-                confirmarpersonagem = pyscreeze.locateCenterOnScreen("confirmarpersonagem.png", confidence= 0.8, minSearchTime=5)
+                confirmarpersonagem = pyscreeze.locateCenterOnScreen("./img/confirmarpersonagem.png", confidence= 0.8, minSearchTime=4)
                 pyautogui.moveTo(confirmarpersonagem, duration = 0.5)
                 pyautogui.click()
                 break
             except:
                 pass
             try:
-                kayn = pyscreeze.locateCenterOnScreen(poutput3 + png, confidence= 0.8, minSearchTime=10)
-                pyautogui.moveTo(kayn, duration = 0.5)
+                personagem3 = pyscreeze.locateCenterOnScreen(poutput3 + png, confidence= 0.8, minSearchTime=5)
+                pyautogui.moveTo(personagem3, duration = 0.5)
                 pyautogui.click()
 
-                confirmarpersonagem = pyscreeze.locateCenterOnScreen("confirmarpersonagem.png", confidence= 0.8, minSearchTime=5)
+                confirmarpersonagem = pyscreeze.locateCenterOnScreen("./img/confirmarpersonagem.png", confidence= 0.8, minSearchTime=4)
                 pyautogui.moveTo(confirmarpersonagem, duration = 0.5)
                 pyautogui.click()
                 break
             except:
                 pass
-            return
-    
-
-
-nome1 = tk.Label(janela, text="Primeiro personagem:").grid(row=0, padx=5, pady=5)
-nome2 = tk.Label(janela, text="Segundo personagem:").grid(row=1, padx=5, pady=5)
-nome3 = tk.Label(janela, text="Terceiro personagem:").grid(row=2, padx=5, pady=5)
-ban1 = tk.Label(janela, text="Primeiro ban").grid(row=3, padx=5, pady=5)
-ban2 = tk.Label(janela, text="Segundo ban").grid(row=4, padx=5, pady=5)
+            break
+        
+window.close()
 
 
 
-char1input = tk.Entry(janela)
-char2input = tk.Entry(janela)
-char3input = tk.Entry(janela)
-ban1input = tk.Entry(janela)
-ban2input = tk.Entry(janela)
 
-char1input.grid(row=0, column=1, padx=5, pady=5)
-char2input.grid(row=1, column=1, padx=5, pady=5)
-char3input.grid(row=2, column=1, padx=5, pady=5)
-ban1input.grid(row=3, column=1, padx=5, pady=5)
-ban2input.grid(row=4, column=1, padx=5, pady=5)
-
-
-enviar = Button(janela, command=iniciar, text="Ativar")
-enviar.grid(column=1, row=8, padx=10, pady=10)
-
-
-janela.mainloop()
+"""             try:
+                selecampeao = pyscreeze.locateCenterOnScreen("selec.PNG", confidence= 0.8, minSearchTime=500)
+                pyautogui.moveTo(selecampeao, duration = 0.5)
+                pyautogui.click()
+                break
+            except:
+                pass """
